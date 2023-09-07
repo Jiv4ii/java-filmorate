@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Film;
+
 import com.example.demo.model.User;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -9,13 +9,13 @@ import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserValidationTest {
