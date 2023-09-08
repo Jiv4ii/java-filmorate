@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserValidationTests {
-    private ValidatorFactory validatorFactory;
-    private Validator validator;
-    private User user;
+    ValidatorFactory validatorFactory;
+    Validator validator;
+    User user;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
         user = new User();
@@ -36,14 +36,14 @@ public class UserValidationTests {
     }
 
     @Test
-    public void testValidFilm() {
+    public void testValidUser() {
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals(0, violations.size(), "Поля фильма переданы неверно");
 
     }
 
     @Test
-    public void testInvalidEmail() {
+    void testInvalidEmail() {
         user.setEmail("bademail");
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());
@@ -62,7 +62,7 @@ public class UserValidationTests {
     }
 
     @Test
-    public void testInvalidLogin() {
+    void testInvalidLogin() {
         user.setLogin(null);
 
         Set<ConstraintViolation<User>> violations = validator.validate(user);
@@ -83,7 +83,7 @@ public class UserValidationTests {
 
 
     @Test
-    public void testInvalidFilmDuration() {
+    void testInvalidBirthdayDate() {
         user.setBirthday(LocalDate.of(2100, 12, 12));
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());

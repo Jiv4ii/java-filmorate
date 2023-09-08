@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Data
-@ToString
 @Accessors(chain = true)
 public class Film {
     private long id;

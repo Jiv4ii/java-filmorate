@@ -40,7 +40,7 @@ public class FilmController {
     }
 
 
-    @GetMapping()
+    @GetMapping
     public Collection<Film> getFilms() {
         log.info("Success, films received");
         return filmMap.values();

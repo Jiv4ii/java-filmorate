@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 
 
 public class FilmValidationTests {
-    private ValidatorFactory validatorFactory;
-    private Validator validator;
-    private Film film;
+    ValidatorFactory validatorFactory;
+    Validator validator;
+    Film film;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
         film = new Film();
@@ -36,14 +36,14 @@ public class FilmValidationTests {
     }
 
     @Test
-    public void testValidFilm() {
+    void testValidFilm() {
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         Assertions.assertEquals(0, violations.size(), "Поля фильма переданы неверно");
 
     }
 
     @Test
-    public void testInvalidFilmName() {
+    void testInvalidFilmName() {
         film.setName(null);
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());
@@ -54,7 +54,7 @@ public class FilmValidationTests {
     }
 
     @Test
-    public void testInvalidFilmDescription() {
+    void testInvalidFilmDescription() {
         film.setDescription("ll of the annotations used in the example are standard JSR annotations:\n" +
                 "\n" +
                 "@NotNull validates that the annotated property value is not null.\n" +
@@ -82,7 +82,7 @@ public class FilmValidationTests {
     }
 
     @Test
-    public void testInvalidFilmDate() {
+    void testInvalidFilmDate() {
         film.setReleaseDate(LocalDate.of(1800, 12, 21));
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());
@@ -92,7 +92,7 @@ public class FilmValidationTests {
     }
 
     @Test
-    public void testInvalidFilmDuration() {
+    void testInvalidFilmDuration() {
         film.setDuration(-2);
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());

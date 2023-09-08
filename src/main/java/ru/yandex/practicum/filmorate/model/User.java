@@ -12,7 +12,6 @@ import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 @Data
-@ToString
 @Accessors(chain = true)
 public class User {
     private long id;
