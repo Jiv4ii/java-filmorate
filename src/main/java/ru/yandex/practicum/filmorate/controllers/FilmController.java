@@ -36,7 +36,7 @@ public class FilmController {
             return film;
         }
         log.info("Error, with updating film ");
-        return filmMap.get(film.getId());
+        throw new IllegalStateException();
     }
 
 

@@ -39,7 +39,7 @@ public class UserController {
             return user;
         }
         log.info("Error, with updating user ");
-        return userMap.get(user.getId());
+        throw new IllegalStateException();
     }
 
 
