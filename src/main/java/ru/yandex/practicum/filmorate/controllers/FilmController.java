@@ -30,9 +30,13 @@ public class FilmController {
 
     @PutMapping
     public Film updateFilm(@RequestBody Film film) {
-        filmMap.put(film.getId(), film);
-        log.info("Success, updated film - {}", film);
-        return film;
+        if (filmMap.containsKey(film.getId())) {
+            filmMap.put(film.getId(), film);
+            log.info("Success, updated film - {}", film);
+            return film;
+        }
+        log.info("Error, with updating film ");
+        return filmMap.get(film.getId());
     }
 
 

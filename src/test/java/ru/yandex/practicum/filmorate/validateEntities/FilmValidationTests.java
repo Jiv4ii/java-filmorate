@@ -33,7 +33,7 @@ public class FilmValidationTests {
                 .setName("Name")
                 .setDescription("Описание")
                 .setReleaseDate(LocalDate.of(1950, 12, 12))
-                .setDuration(Duration.ofHours(2));
+                .setDuration(120);
     }
 
     @Test
@@ -94,7 +94,7 @@ public class FilmValidationTests {
 
     @Test
     public void testInvalidFilmDuration() {
-        film.setDuration(Duration.ofHours(1).minusHours(2));
+        film.setDuration(-2);
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());
 

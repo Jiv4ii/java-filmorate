@@ -33,9 +33,13 @@ public class UserController {
 
     @PutMapping
     public User updateFilm(@RequestBody User user) {
-        userMap.put(user.getId(), user);
-        log.info("Success, updated user - {}", user);
-        return user;
+        if (userMap.containsKey(user.getId())) {
+            userMap.put(user.getId(), user);
+            log.info("Success, updated user - {}", user);
+            return user;
+        }
+        log.info("Error, with updating user ");
+        return userMap.get(user.getId());
     }
 
 
