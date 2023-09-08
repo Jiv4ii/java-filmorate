@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class UserController {
 
     private final HashMap<Long, User> userMap = new HashMap<>();
-    private long id = 0;
+    private long id = 1;
 
     @PostMapping
     public User createUser(@Valid @RequestBody User user) {
@@ -31,18 +31,13 @@ public class UserController {
         return userMap.get(user.getId());
     }
 
-    @PutMapping("/{userId}")
-    public User updateFilm(@PathVariable Long userId, @RequestBody User user) {
-        userMap.put(userId, user);
+    @PutMapping
+    public User updateFilm( @RequestBody User user) {
+        userMap.put(user.getId(), user);
         log.info("Success, updated user - {}", user);
         return user;
     }
 
-    @GetMapping("/{id}")
-    public User getUser(@PathVariable("id") long id) {
-        log.info("Success, users received");
-        return userMap.get(id);
-    }
 
     @GetMapping
     public Collection<User> getUsers() {

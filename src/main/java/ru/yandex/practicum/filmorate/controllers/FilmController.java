@@ -18,7 +18,7 @@ import java.util.HashMap;
 @RequestMapping("/films")
 public class FilmController {
     private final HashMap<Long, Film> filmMap = new HashMap<>();
-    private long id = 0;
+    private long id = 1;
 
     @PostMapping
     public Film createFilm(@Valid @RequestBody Film film) {
@@ -28,18 +28,13 @@ public class FilmController {
         return film;
     }
 
-    @PutMapping("/{id}")
-    public Film updateFilm(@PathVariable Long id, @RequestBody Film film) {
-        filmMap.put(id, film);
+    @PutMapping
+    public Film updateFilm(@RequestBody Film film) {
+        filmMap.put(film.getId(), film);
         log.info("Success, updated film - {}", film);
         return film;
     }
 
-    @GetMapping("/{id}")
-    public Film getFilm(@PathVariable Long id) {
-        log.info("Success, films received");
-        return filmMap.get(id);
-    }
 
     @GetMapping()
     public Collection<Film> getFilms() {
