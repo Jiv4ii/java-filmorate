@@ -18,12 +18,14 @@ import java.util.HashMap;
 public class UserController {
 
     private final HashMap<Long, User> userMap = new HashMap<>();
+    private long id = 0;
 
     @PostMapping
     public User createUser(@Valid @RequestBody User user) {
         if (user.getName() == null) {
             user.setName(user.getLogin());
         }
+        user.setId(id++);
         userMap.put(user.getId(), user);
         log.info("Success, created user - {}", user);
         return userMap.get(user.getId());

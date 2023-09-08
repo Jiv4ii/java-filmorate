@@ -18,9 +18,11 @@ import java.util.HashMap;
 @RequestMapping("/films")
 public class FilmController {
     private final HashMap<Long, Film> filmMap = new HashMap<>();
+    private long id = 0;
 
     @PostMapping
     public Film createFilm(@Valid @RequestBody Film film) {
+        film.setId(id++);
         filmMap.put(film.getId(), film);
         log.info("Success, created film - {}", film);
         return film;
