@@ -14,7 +14,7 @@ public class DateValidator implements ConstraintValidator<DateValidation, LocalD
     @Override
     public boolean isValid(LocalDate value, ConstraintValidatorContext context) {
         // Реализуйте вашу логику валидации
-        if (value == null){
+        if (value == null) {
             return false;
         }
         LocalDate criticalDate = LocalDate.of(1895, 12, 28);
