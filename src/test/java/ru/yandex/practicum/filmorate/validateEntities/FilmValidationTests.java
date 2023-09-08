@@ -1,8 +1,6 @@
 package ru.yandex.practicum.filmorate.validateEntities;
 
 
-
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -42,7 +40,7 @@ public class FilmValidationTests {
     public void testValidFilm() {
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         Assertions.assertEquals(0, violations.size(), "Поля фильма переданы неверно");
-        
+
     }
 
     @Test
@@ -86,7 +84,7 @@ public class FilmValidationTests {
 
     @Test
     public void testInvalidFilmDate() {
-        film.setDate(LocalDate.of(1800,12,21));
+        film.setDate(LocalDate.of(1800, 12, 21));
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());
 
@@ -103,8 +101,6 @@ public class FilmValidationTests {
         Assertions.assertEquals(1, violations.size(), "Создан обьект с длительностью");
         Assertions.assertEquals("продолжительность фильма должна быть положительной", list.get(0));
     }
-
-
 
 
 }

@@ -1,8 +1,6 @@
 package ru.yandex.practicum.filmorate.validateEntities;
 
 
-
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.yandex.practicum.filmorate.model.User;
@@ -34,7 +32,7 @@ public class UserValidationTests {
                 .setEmail("Email@mail.mail")
                 .setLogin("sher")
                 .setName("faer")
-                .setBirthday(LocalDate.of(2000,12,12));
+                .setBirthday(LocalDate.of(2000, 12, 12));
     }
 
     @Test
@@ -84,18 +82,15 @@ public class UserValidationTests {
     }
 
 
-
     @Test
     public void testInvalidFilmDuration() {
-        user.setBirthday(LocalDate.of(2100,12,12));
+        user.setBirthday(LocalDate.of(2100, 12, 12));
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());
 
         assertEquals(1, violations.size(), "Создан обьект с длительностью");
         assertEquals("Дата рождения не может быть в будущем", list.get(0));
     }
-
-
 
 
 }
