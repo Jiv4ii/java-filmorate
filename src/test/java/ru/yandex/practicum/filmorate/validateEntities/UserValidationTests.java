@@ -1,15 +1,17 @@
-package com.example.demo.controller;
+package ru.yandex.practicum.filmorate.validateEntities;
 
 
-import com.example.demo.model.User;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
+
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.filmorate.model.User;
 
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
@@ -18,7 +20,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserValidationTest {
+public class UserValidationTests {
     private ValidatorFactory validatorFactory;
     private Validator validator;
     private User user;

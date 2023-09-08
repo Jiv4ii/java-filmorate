@@ -1,23 +1,27 @@
-package com.example.demo.controller;
+package ru.yandex.practicum.filmorate.validateEntities;
 
-import com.example.demo.model.Film;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
+
+
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.filmorate.model.Film;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.time.Duration;
 import java.time.LocalDate;
 
 import java.util.List;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FilmValidationTest {
+public class FilmValidationTests {
     private ValidatorFactory validatorFactory;
     private Validator validator;
     private Film film;
@@ -37,7 +41,7 @@ public class FilmValidationTest {
     @Test
     public void testValidFilm() {
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
-        assertEquals(0, violations.size(), "Поля фильма переданы неверно");
+        Assertions.assertEquals(0, violations.size(), "Поля фильма переданы неверно");
         
     }
 
@@ -47,8 +51,8 @@ public class FilmValidationTest {
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());
 
-        assertEquals(1, violations.size(), "Создан обьект с некорректным именем");
-        assertEquals("название не может быть пустым", list.get(0));
+        Assertions.assertEquals(1, violations.size(), "Создан обьект с некорректным именем");
+        Assertions.assertEquals("название не может быть пустым", list.get(0));
 
     }
 
@@ -75,8 +79,8 @@ public class FilmValidationTest {
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());
 
-        assertEquals(1, violations.size(), "Создан обьект с некорректным описанием");
-        assertEquals("максимальная длина описания — 200 символов", list.get(0));
+        Assertions.assertEquals(1, violations.size(), "Создан обьект с некорректным описанием");
+        Assertions.assertEquals("максимальная длина описания — 200 символов", list.get(0));
 
     }
 
@@ -86,8 +90,8 @@ public class FilmValidationTest {
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());
 
-        assertEquals(1, violations.size(), "Создан обьект с некорректной датой выпуска");
-        assertEquals("дата релиза — не раньше 28 декабря 1895 года", list.get(0));
+        Assertions.assertEquals(1, violations.size(), "Создан обьект с некорректной датой выпуска");
+        Assertions.assertEquals("дата релиза — не раньше 28 декабря 1895 года", list.get(0));
     }
 
     @Test
@@ -96,8 +100,8 @@ public class FilmValidationTest {
         Set<ConstraintViolation<Film>> violations = validator.validate(film);
         List<String> list = violations.stream().map(v -> v.getMessage()).collect(Collectors.toList());
 
-        assertEquals(1, violations.size(), "Создан обьект с длительностью");
-        assertEquals("продолжительность фильма должна быть положительной", list.get(0));
+        Assertions.assertEquals(1, violations.size(), "Создан обьект с длительностью");
+        Assertions.assertEquals("продолжительность фильма должна быть положительной", list.get(0));
     }
 
 

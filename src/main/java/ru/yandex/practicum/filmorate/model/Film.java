@@ -1,13 +1,15 @@
-package com.example.demo.model;
+package ru.yandex.practicum.filmorate.model;
 
-import com.example.demo.validate.DateValidation;
-import com.example.demo.validate.DurationValidation;
-import jakarta.validation.constraints.*;
+
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import ru.yandex.practicum.filmorate.validate.DateValidation;
+import ru.yandex.practicum.filmorate.validate.DurationValidation;
 
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.Duration;
 import java.time.LocalDate;
 
