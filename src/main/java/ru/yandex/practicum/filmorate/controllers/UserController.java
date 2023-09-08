@@ -14,7 +14,7 @@ import java.util.HashMap;
 @RestController
 @Slf4j
 @Validated
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     private final HashMap<Long, User> userMap = new HashMap<>();
@@ -42,7 +42,7 @@ public class UserController {
         return userMap.get(id);
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public Collection<User> getUsers() {
         log.info("Success, users received");
         return userMap.values();

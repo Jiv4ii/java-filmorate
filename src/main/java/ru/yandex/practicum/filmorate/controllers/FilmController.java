@@ -15,7 +15,7 @@ import java.util.HashMap;
 @RestController
 @Slf4j
 @Validated
-@RequestMapping("/film")
+@RequestMapping("/films")
 public class FilmController {
     private final HashMap<Long, Film> filmMap = new HashMap<>();
 
@@ -39,7 +39,7 @@ public class FilmController {
         return filmMap.get(id);
     }
 
-    @GetMapping("/films")
+    @GetMapping()
     public Collection<Film> getFilms() {
         log.info("Success, films received");
         return filmMap.values();
