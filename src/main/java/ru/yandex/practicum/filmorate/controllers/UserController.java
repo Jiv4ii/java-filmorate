@@ -8,6 +8,7 @@ import ru.yandex.practicum.filmorate.model.User;
 
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.HashMap;
 
 @RestController
@@ -36,9 +37,15 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUsers(@PathVariable("id") long id) {
+    public User getUser(@PathVariable("id") long id) {
         log.info("Success, users received");
         return userMap.get(id);
+    }
+
+    @GetMapping("/users")
+    public Collection<User> getUsers() {
+        log.info("Success, users received");
+        return userMap.values();
     }
 
 

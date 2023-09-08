@@ -9,6 +9,7 @@ import ru.yandex.practicum.filmorate.model.Film;
 
 
 import javax.validation.Valid;
+import java.util.Collection;
 import java.util.HashMap;
 
 @RestController
@@ -33,9 +34,15 @@ public class FilmController {
     }
 
     @GetMapping("/{id}")
-    public Film getFilms(@PathVariable Long id) {
+    public Film getFilm(@PathVariable Long id) {
         log.info("Success, films received");
         return filmMap.get(id);
+    }
+
+    @GetMapping("/films")
+    public Collection<Film> getFilms() {
+        log.info("Success, films received");
+        return filmMap.values();
     }
 }
 

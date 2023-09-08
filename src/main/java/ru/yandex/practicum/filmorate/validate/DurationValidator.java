@@ -13,6 +13,9 @@ public class DurationValidator implements ConstraintValidator<DurationValidation
 
     @Override
     public boolean isValid(Duration value, ConstraintValidatorContext context) {
+        if (value == null){
+            return false;
+        }
 
         return !value.isNegative();
     }

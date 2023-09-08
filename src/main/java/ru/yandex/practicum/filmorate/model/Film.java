@@ -23,7 +23,7 @@ public class Film {
     @Size(max = 200, message = "максимальная длина описания — 200 символов")
     private String description;
     @DateValidation(message = "дата релиза — не раньше 28 декабря 1895 года")
-    private LocalDate date;
+    private LocalDate releaseDate;
     @DurationValidation(message = "продолжительность фильма должна быть положительной")
     private Duration duration;
 
