@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PutMapping
-    public User updateFilm( @RequestBody User user) {
+    public User updateFilm(@RequestBody User user) {
         userMap.put(user.getId(), user);
         log.info("Success, updated user - {}", user);
         return user;
