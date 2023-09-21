@@ -3,7 +3,7 @@ package ru.yandex.practicum.filmorate.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.ToString;
+
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Email;

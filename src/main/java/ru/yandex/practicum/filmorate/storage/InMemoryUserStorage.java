@@ -55,10 +55,10 @@ public class InMemoryUserStorage implements UserStorage {
 
     @Override
     public User getUser(long id) {
-        if (id < 0 || id > this.id){
+        if (id < 0 || id > this.id) {
             throw new IllegalArgumentException("Некорректный пользовательский id");
         }
-        log.info("Получен пользователь - {}",id);
+        log.info("Получен пользователь - {}", id);
         return userMap.get(id);
     }
 
