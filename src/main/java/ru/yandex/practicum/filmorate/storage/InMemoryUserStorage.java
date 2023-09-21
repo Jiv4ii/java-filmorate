@@ -45,6 +45,7 @@ public class InMemoryUserStorage implements UserStorage {
     @Override
     public User updateUser(User user) {
         if (userMap.containsKey(user.getId())) {
+            user.setFriends(userMap.get(user.getId()).getFriends());
             userMap.put(user.getId(), user);
             log.info("Success, updated user - {}", user);
             return user;
@@ -58,7 +59,6 @@ public class InMemoryUserStorage implements UserStorage {
         if (id < 0 || id > this.id) {
             throw new IllegalArgumentException("Некорректный пользовательский id");
         }
-        log.info("Получен пользователь - {}", id);
         return userMap.get(id);
     }
 

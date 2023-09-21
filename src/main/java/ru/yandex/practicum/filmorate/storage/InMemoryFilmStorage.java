@@ -55,7 +55,6 @@ public class InMemoryFilmStorage implements FilmStorage {
         if (id < 0 || id > this.id) {
             throw new IllegalArgumentException("Некорректный фильм id");
         }
-        log.info("Получен фильм - {}", id);
         return filmMap.get(id);
     }
 
