@@ -57,5 +57,10 @@ public class FilmController {
     public List<Film> getPopularFilms(@RequestParam(name = "count", defaultValue = "10") Integer count) {
         return filmService.getMostLikedFilms(count);
     }
+
+    @GetMapping("/{id}")
+    public Film getFilm(@PathVariable long id) {
+        return filmStorage.getFilm(id);
+    }
 }
 

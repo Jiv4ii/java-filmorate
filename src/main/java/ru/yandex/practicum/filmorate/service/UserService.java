@@ -3,6 +3,7 @@ package ru.yandex.practicum.filmorate.service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.util.Set;
@@ -24,8 +25,8 @@ public class UserService {
         if (friendId < 1 || friendId > userStorage.getId()) {
             throw new IllegalArgumentException("Некорректный Id друга");
         }
-        userStorage.getUser(userId).getFriends().add(friendId);
-        userStorage.getUser(friendId).getFriends().add(userId);
+        userStorage.getUser(userId).getFriends().add(userStorage.getUser(friendId));
+        userStorage.getUser(friendId).getFriends().add(userStorage.getUser(userId));
         log.info("Пользователи с id {} и {} теперь друзья", userId, friendId);
     }
 
@@ -36,27 +37,27 @@ public class UserService {
         if (friendId < 1 || friendId > userStorage.getId()) {
             throw new IllegalArgumentException("Некорректный Id друга");
         }
-        userStorage.getUser(userId).getFriends().remove(friendId);
-        userStorage.getUser(friendId).getFriends().remove(userId);
+        userStorage.getUser(userId).getFriends().remove(userStorage.getUser(friendId));
+        userStorage.getUser(friendId).getFriends().remove(userStorage.getUser(userId));
         log.info("Пользователи с id {} и {} теперь не друзья", userId, friendId);
     }
 
-    public Set getCommonFriends(Long userId, Long friendId) {
+    public Set<User> getCommonFriends(Long userId, Long friendId) {
         if (userId < 1 || userId > userStorage.getId()) {
             throw new IllegalArgumentException("Некорректный Id пользователя");
         }
         if (friendId < 1 || friendId > userStorage.getId()) {
             throw new IllegalArgumentException("Некорректный Id друга");
         }
-        Set<Long> set1 = userStorage.getUser(userId).getFriends();
-        Set<Long> set2 = userStorage.getUser(friendId).getFriends();
+        Set<User> set1 = userStorage.getUser(userId).getFriends();
+        Set<User> set2 = userStorage.getUser(friendId).getFriends();
 
         set1.retainAll(set2);
         log.info("Выведен список фильмов с общих друзей пользователей {} и {}", userId, friendId);
         return set1;
     }
 
-    public Set<Long> getFriends(Long userId) {
+    public Set<User> getFriends(Long userId) {
         if (userId < 1 || userId > userStorage.getId()) {
             throw new IllegalArgumentException("Некорректный Id пользователя");
         }
