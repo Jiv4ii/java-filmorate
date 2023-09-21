@@ -4,6 +4,7 @@ package ru.yandex.practicum.filmorate.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.Email;
@@ -32,6 +33,7 @@ public class User {
     private LocalDate birthday;
 
     @JsonIgnore
+    @ToString.Exclude
     private Set<User> friends = new HashSet<>();
 
     @Override
