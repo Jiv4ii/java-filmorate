@@ -57,7 +57,7 @@ public class UserService {
 
         commonFriends.retainAll(set2);
         log.info("Выведен список фильмов с общих друзей пользователей {} и {}", userId, friendId);
-        return set1;
+        return commonFriends;
     }
 
     public Set<User> getFriends(Long userId) {
