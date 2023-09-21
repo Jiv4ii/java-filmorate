@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Slf4j
@@ -62,6 +65,7 @@ public class UserService {
             throw new IllegalArgumentException("Некорректный Id пользователя");
         }
         log.info("Выведен список друзей пользователя {}", userId);
+
         return userStorage.getUser(userId).getFriends();
 
     }
