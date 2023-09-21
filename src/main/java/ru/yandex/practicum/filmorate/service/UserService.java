@@ -7,6 +7,7 @@ import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
@@ -52,8 +53,9 @@ public class UserService {
         }
         Set<User> set1 = userStorage.getUser(userId).getFriends();
         Set<User> set2 = userStorage.getUser(friendId).getFriends();
+        Set<User> commonFriends = new HashSet<>(set1);
 
-        set1.retainAll(set2);
+        commonFriends.retainAll(set2);
         log.info("Выведен список фильмов с общих друзей пользователей {} и {}", userId, friendId);
         return set1;
     }
