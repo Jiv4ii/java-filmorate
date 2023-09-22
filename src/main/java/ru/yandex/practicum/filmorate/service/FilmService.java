@@ -23,24 +23,24 @@ public class FilmService {
     }
 
     public void addlike(Long filmId, Long userId) {
-        if (filmId < 1 || filmId > filmStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный фильм Id");
+        if (filmStorage.getFilm(filmId) == null) {
+            throw new IllegalArgumentException("фильм с Id - {}, не найден");
         }
-        if (userId < 1 || userId > userStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный пользовательский Id");
+        if (userStorage.getUser(userId) == null) {
+            throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
         }
-        filmStorage.getFilm(filmId).getLikes().add(userId);
+        filmStorage.addLike(filmId, userId);
         log.info("Пользователь с id {} поставил лайк фильму с индексом {}", userId, filmId);
     }
 
     public void deleteLike(Long filmId, Long userId) {
-        if (filmId < 1 || filmId > filmStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный фильм Id");
+        if (filmStorage.getFilm(filmId) == null) {
+            throw new IllegalArgumentException("Фильм с Id - {}, не найден");
         }
-        if (userId < 1 || userId > userStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный пользовательский Id");
+        if (userStorage.getUser(userId) == null) {
+            throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
         }
-        filmStorage.getFilm(filmId).getLikes().remove(userId);
+        filmStorage.removeLike(filmId, userId);
         log.info("Пользователь с id {} убрал лайк фильму с индексом {}", userId, filmId);
     }
 
@@ -48,13 +48,22 @@ public class FilmService {
         if (count < 0) {
             throw new IllegalArgumentException("Поле <count> должно быть положительным");
         }
-        Collection<Film> films = new HashSet<>(filmStorage.getFilms());
-        List<Film> sortedFilms = new ArrayList<>(films);
-        Comparator<Film> comparator = Collections.reverseOrder(Comparator.comparingInt(obj -> obj.getLikes().size()));
-        sortedFilms.sort(comparator);
-        if (sortedFilms.size() > count) {
-            sortedFilms = sortedFilms.subList(0, count);
-        }
-        return sortedFilms;
+        return filmStorage.getMostLikedFilms(count);
+    }
+
+    public Film createFilm(Film film) {
+        return filmStorage.addFilm(film);
+    }
+
+    public Film updateFilm(Film film) {
+        return filmStorage.updateFilm(film);
+    }
+
+    public Collection<Film> getFilms() {
+        return filmStorage.getFilms();
+    }
+
+    public Film getFilm(long id) {
+        return filmStorage.getFilm(id);
     }
 }

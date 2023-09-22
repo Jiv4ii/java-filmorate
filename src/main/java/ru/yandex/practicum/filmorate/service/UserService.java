@@ -7,6 +7,7 @@ import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,35 +22,33 @@ public class UserService {
     }
 
     public void addFriend(Long userId, Long friendId) {
-        if (userId < 1 || userId > userStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный Id пользователя");
+        if (userStorage.getUser(userId) == null) {
+            throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
         }
-        if (friendId < 1 || friendId > userStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный Id друга");
+        if (userStorage.getUser(friendId) == null) {
+            throw new IllegalArgumentException("Друг с Id - {}, не найден");
         }
-        userStorage.getUser(userId).getFriends().add(userStorage.getUser(friendId));
-        userStorage.getUser(friendId).getFriends().add(userStorage.getUser(userId));
+        userStorage.addLike(userId, friendId);
         log.info("Пользователи с id {} и {} теперь друзья", userId, friendId);
     }
 
     public void deleteFriend(Long userId, Long friendId) {
-        if (userId < 1 || userId > userStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный Id пользователя");
+        if (userStorage.getUser(userId) == null) {
+            throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
         }
-        if (friendId < 1 || friendId > userStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный Id друга");
+        if (userStorage.getUser(friendId) == null) {
+            throw new IllegalArgumentException("Друг с Id - {}, не найден");
         }
-        userStorage.getUser(userId).getFriends().remove(userStorage.getUser(friendId));
-        userStorage.getUser(friendId).getFriends().remove(userStorage.getUser(userId));
+        userStorage.removeLike(userId, friendId);
         log.info("Пользователи с id {} и {} теперь не друзья", userId, friendId);
     }
 
     public Set<User> getCommonFriends(Long userId, Long friendId) {
-        if (userId < 1 || userId > userStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный Id пользователя");
+        if (userStorage.getUser(userId) == null) {
+            throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
         }
-        if (friendId < 1 || friendId > userStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный Id друга");
+        if (userStorage.getUser(friendId) == null) {
+            throw new IllegalArgumentException("Друг с Id - {}, не найден");
         }
         Set<User> set1 = userStorage.getUser(userId).getFriends();
         Set<User> set2 = userStorage.getUser(friendId).getFriends();
@@ -61,12 +60,28 @@ public class UserService {
     }
 
     public Set<User> getFriends(Long userId) {
-        if (userId < 1 || userId > userStorage.getId()) {
-            throw new IllegalArgumentException("Некорректный Id пользователя");
+        if (userStorage.getUser(userId) != null) {
+            throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
         }
         log.info("Выведен список друзей пользователя {}", userId);
 
         return userStorage.getUser(userId).getFriends();
 
+    }
+
+    public User createUser(User user) {
+        return userStorage.addUser(user);
+    }
+
+    public User updateUser(User user) {
+        return userStorage.updateUser(user);
+    }
+
+    public Collection<User> getUsers() {
+        return userStorage.getUsers();
+    }
+
+    public User getUser(long id) {
+        return userStorage.getUser(id);
     }
 }

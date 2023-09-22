@@ -4,8 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.Film;
 
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
 @Component
 @Slf4j
@@ -52,10 +51,32 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     @Override
     public Film getFilm(long id) {
-        if (id < 0 || id > this.id) {
-            throw new IllegalArgumentException("Некорректный фильм id");
+        if (filmMap.get(id) == null) {
+            throw new IllegalArgumentException("Фильм c Id - " + id +", не найден");
         }
         return filmMap.get(id);
+    }
+
+    @Override
+    public void addLike(long filmId, long userId) {
+        filmMap.get(filmId).getLikes().add(userId);
+    }
+
+    @Override
+    public void removeLike(long filmId, long userId) {
+        filmMap.get(filmId).getLikes().remove(userId);
+    }
+
+    @Override
+    public List<Film> getMostLikedFilms(Integer count) {
+        Collection<Film> films = new HashSet<>(getFilms());
+        List<Film> sortedFilms = new ArrayList<>(films);
+        Comparator<Film> comparator = Collections.reverseOrder(Comparator.comparingInt(obj -> obj.getLikes().size()));
+        sortedFilms.sort(comparator);
+        if (sortedFilms.size() > count) {
+            sortedFilms = sortedFilms.subList(0, count);
+        }
+        return sortedFilms;
     }
 
     public long getId() {

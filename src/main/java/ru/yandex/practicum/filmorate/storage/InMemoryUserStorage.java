@@ -62,6 +62,18 @@ public class InMemoryUserStorage implements UserStorage {
         return userMap.get(id);
     }
 
+    @Override
+    public void addLike(long userId, long friendId){
+        userMap.get(userId).getFriends().add(userMap.get(friendId));
+        userMap.get(friendId).getFriends().add(userMap.get(userId));
+    }
+
+    @Override
+    public void removeLike(long userId, long friendId){
+        userMap.get(userId).getFriends().remove(userMap.get(friendId));
+        userMap.get(friendId).getFriends().remove(userMap.get(userId));
+    }
+    @Override
     public long getId() {
         return id;
     }
