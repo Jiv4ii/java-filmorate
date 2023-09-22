@@ -6,6 +6,8 @@ import ru.yandex.practicum.filmorate.model.User;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 @Slf4j
@@ -63,19 +65,30 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public void addLike(long userId, long friendId){
+    public void addLike(long userId, long friendId) {
         userMap.get(userId).getFriends().add(userMap.get(friendId));
         userMap.get(friendId).getFriends().add(userMap.get(userId));
     }
 
     @Override
-    public void removeLike(long userId, long friendId){
+    public void removeLike(long userId, long friendId) {
         userMap.get(userId).getFriends().remove(userMap.get(friendId));
         userMap.get(friendId).getFriends().remove(userMap.get(userId));
     }
+
     @Override
     public long getId() {
         return id;
+    }
+
+    @Override
+    public Set<User> getCommonFriends(Long userId, Long friendId) {
+        Set<User> set1 = userMap.get(userId).getFriends();
+        Set<User> set2 = userMap.get(friendId).getFriends();
+        Set<User> commonFriends = new HashSet<>(set1);
+
+        commonFriends.retainAll(set2);
+        return commonFriends;
     }
 
 }

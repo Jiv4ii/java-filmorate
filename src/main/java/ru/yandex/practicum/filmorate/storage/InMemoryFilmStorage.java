@@ -52,7 +52,7 @@ public class InMemoryFilmStorage implements FilmStorage {
     @Override
     public Film getFilm(long id) {
         if (filmMap.get(id) == null) {
-            throw new IllegalArgumentException("Фильм c Id - " + id +", не найден");
+            throw new IllegalArgumentException("Фильм c Id - " + id + ", не найден");
         }
         return filmMap.get(id);
     }

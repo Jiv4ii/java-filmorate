@@ -8,7 +8,6 @@ import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
@@ -50,11 +49,8 @@ public class UserService {
         if (userStorage.getUser(friendId) == null) {
             throw new IllegalArgumentException("Друг с Id - {}, не найден");
         }
-        Set<User> set1 = userStorage.getUser(userId).getFriends();
-        Set<User> set2 = userStorage.getUser(friendId).getFriends();
-        Set<User> commonFriends = new HashSet<>(set1);
 
-        commonFriends.retainAll(set2);
+        Set<User> commonFriends = userStorage.getCommonFriends(userId, friendId);
         log.info("Выведен список фильмов с общих друзей пользователей {} и {}", userId, friendId);
         return commonFriends;
     }
