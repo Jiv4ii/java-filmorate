@@ -56,7 +56,7 @@ public class UserService {
     }
 
     public Set<User> getFriends(Long userId) {
-        if (userStorage.getUser(userId) != null) {
+        if (userStorage.getUser(userId) == null) {
             throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
         }
         log.info("Выведен список друзей пользователя {}", userId);
