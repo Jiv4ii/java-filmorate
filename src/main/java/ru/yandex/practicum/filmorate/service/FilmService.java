@@ -45,7 +45,7 @@ public class FilmService {
     }
 
     public List<Film> getMostLikedFilms(Integer count) {
-        if (count < 0) {
+        if (count <= 0) {
             throw new IllegalArgumentException("Поле <count> должно быть положительным");
         }
         return filmStorage.getMostLikedFilms(count);

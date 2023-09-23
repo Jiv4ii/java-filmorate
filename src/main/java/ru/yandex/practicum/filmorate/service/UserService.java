@@ -27,7 +27,7 @@ public class UserService {
         if (userStorage.getUser(friendId) == null) {
             throw new IllegalArgumentException("Друг с Id - {}, не найден");
         }
-        userStorage.addLike(userId, friendId);
+        userStorage.addFriend(userId, friendId);
         log.info("Пользователи с id {} и {} теперь друзья", userId, friendId);
     }
 
@@ -38,7 +38,7 @@ public class UserService {
         if (userStorage.getUser(friendId) == null) {
             throw new IllegalArgumentException("Друг с Id - {}, не найден");
         }
-        userStorage.removeLike(userId, friendId);
+        userStorage.removeFriend(userId, friendId);
         log.info("Пользователи с id {} и {} теперь не друзья", userId, friendId);
     }
 
@@ -56,12 +56,12 @@ public class UserService {
     }
 
     public Set<User> getFriends(Long userId) {
-        if (userStorage.getUser(userId) == null) {
+        User user = userStorage.getUser(userId);
+        if (user == null) {
             throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
         }
         log.info("Выведен список друзей пользователя {}", userId);
-
-        return userStorage.getUser(userId).getFriends();
+        return user.getFriends();
 
     }
 
