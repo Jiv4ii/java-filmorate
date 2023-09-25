@@ -10,6 +10,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Accessors(chain = true)
@@ -23,6 +25,7 @@ public class Film {
     private LocalDate releaseDate;
     @Positive(message = "продолжительность фильма должна быть положительной")
     private int duration;
+    private Set<Long> likes = new HashSet<>();
 
 }
 
