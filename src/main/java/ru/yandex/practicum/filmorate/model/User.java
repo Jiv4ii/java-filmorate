@@ -12,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -35,6 +36,9 @@ public class User {
     @JsonIgnore
     @ToString.Exclude
     private Set<User> friends = new HashSet<>();
+    @JsonIgnore
+    @ToString.Exclude
+    private Set<User> unconfirmed;
 
     @Override
     public boolean equals(Object o) {
