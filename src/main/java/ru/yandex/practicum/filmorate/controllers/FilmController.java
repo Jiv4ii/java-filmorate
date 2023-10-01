@@ -63,14 +63,17 @@ public class FilmController {
     public Integer getFilmGenre(@PathVariable long id) {
         return filmService.getGenreId(id);
     }
+
     @GetMapping("/genres/{id}")
     public String getGenreName(@PathVariable int id) {
         return filmService.getGenre(id);
     }
+
     @GetMapping("/{id}/rating")
     public Integer getFilmRating(@PathVariable long id) {
         return filmService.getRatingId(id);
     }
+
     @GetMapping("/ratings/{id}")
     public String getRatingName(@PathVariable int id) {
         return filmService.getRating(id);
