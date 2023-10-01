@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
@@ -17,7 +18,7 @@ public class FilmService {
     private final UserStorage userStorage;
 
     @Autowired
-    public FilmService(FilmStorage filmStorage, UserStorage userStorage) {
+    public FilmService(@Qualifier("filmDb") FilmStorage filmStorage, @Qualifier("db") UserStorage userStorage) {
         this.filmStorage = filmStorage;
         this.userStorage = userStorage;
     }
@@ -65,5 +66,33 @@ public class FilmService {
 
     public Film getFilm(long id) {
         return filmStorage.getFilm(id);
+    }
+
+    public Integer getRatingId(long filmId) {
+        if (filmStorage.getRatingId(filmId) == null) {
+            throw new IllegalArgumentException("Фильм с Id - {}, не найден");
+        }
+        return filmStorage.getRatingId(filmId);
+    }
+
+    public String getRating(Integer id) {
+        if (filmStorage.getRatingId(id) == null) {
+            throw new IllegalArgumentException("Rating с Id - {}, не найден");
+        }
+        return filmStorage.getRating(id);
+    }
+
+    public Integer getGenreId(long filmId) {
+        if (filmStorage.getRatingId(filmId) == null) {
+            throw new IllegalArgumentException("Фильм с Id - {}, не найден");
+        }
+        return filmStorage.getGenreId(filmId);
+    }
+
+    public String getGenre(Integer id) {
+        if (filmStorage.getRatingId(id) == null) {
+            throw new IllegalArgumentException("Genre с Id - {}, не найден");
+        }
+        return filmStorage.getGenre(id);
     }
 }

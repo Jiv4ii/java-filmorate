@@ -1,8 +1,9 @@
-package ru.yandex.practicum.filmorate.storage;
+package ru.yandex.practicum.filmorate.storage.implementation.inmemory;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
 import java.util.*;
 
@@ -10,6 +11,30 @@ import java.util.*;
 @Slf4j
 public class InMemoryFilmStorage implements FilmStorage {
 
+    @Override
+    public Integer getRatingId(long filmId) {
+        return null;
+    }
+
+    @Override
+    public String getRating(Integer id) {
+        return null;
+    }
+
+    @Override
+    public Integer getGenreId(long filmId) {
+        return null;
+    }
+
+    @Override
+    public String getGenre(Integer id) {
+        return null;
+    }
+
+    @Override
+    public Collection<Long> getLikes(long id) {
+        return null;
+    }
 
     private final HashMap<Long, Film> filmMap = new HashMap<>();
     private long id = 1;
