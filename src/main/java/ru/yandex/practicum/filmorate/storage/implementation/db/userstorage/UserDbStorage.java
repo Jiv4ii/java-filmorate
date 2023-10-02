@@ -26,7 +26,7 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public User addUser(User user) {
-        if (user.getName().isBlank() || user.getName().isEmpty()){
+        if (user.getName().isBlank() || user.getName().isEmpty()) {
             user.setName(user.getLogin());
         }
         jdbcTemplate.update("insert into users(email,login,name,birthday) values (?,?,?,?)", user.getEmail(), user.getLogin(), user.getName(), user.getBirthday());
