@@ -74,14 +74,14 @@ public class FilmDbStorage implements FilmStorage {
     @Override
     public Film getFilm(long id) {
         Film film = jdbcTemplate.query("select * from films as t1 inner join ratings as t2 on t1.RATING_id = t2.ID  where t1.id = ?", ps -> ps.setLong(1, id), filmRowMapper).stream().findFirst().orElse(null);
-/*        try {
+        try {
             Set<Genre> genres = new HashSet<>(jdbcTemplate.query("select genre_id, genre from FILM_GENRES as t1 inner join genres as t2 on t1.GENRE_ID = t2.ID where FILM_ID = ?", genreRowMapper, id));
             if (film != null) {
                 film.setGenres(new ArrayList<>(genres));
             }
         } catch (Exception exception) {
             //Костыль на случай обращения к пустой таблице film_genres
-        }*/
+        }
         return film;
     }
 
