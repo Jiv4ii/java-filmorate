@@ -21,8 +21,6 @@ public interface FilmStorage {
 
     void removeLike(long filmId, long userId);
 
-    Collection<Long> getLikes(long id);
-
     List<Film> getMostLikedFilms(Integer count);
 
 

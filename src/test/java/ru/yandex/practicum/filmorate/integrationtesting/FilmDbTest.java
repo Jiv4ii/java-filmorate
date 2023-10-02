@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.model.Rating;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.implementation.db.filmstorage.FilmDbStorage;
 import ru.yandex.practicum.filmorate.storage.implementation.db.userstorage.UserDbStorage;
@@ -28,10 +29,10 @@ public class FilmDbTest {
 
     @Test
     void testFilmDb() {
-        Film film = new Film().setId(1).setName("film").setDescription("descr").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1));
-        Film film2 = new Film().setId(2).setName("film2").setDescription("descr2").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1));
-        Film film3 = new Film().setId(3).setName("film3").setDescription("descr3").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1));
-        Film updatedFilm = new Film().setId(1).setName("upfilm").setDescription("updescr").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1));
+        Film film = new Film().setId(1).setName("film").setDescription("descr").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1)).setMpa(new Rating().setId(2L).setName("PG"));
+        Film film2 = new Film().setId(2).setName("film2").setDescription("descr2").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1)).setMpa(new Rating().setId(2L).setName("PG"));
+        Film film3 = new Film().setId(3).setName("film3").setDescription("descr3").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1)).setMpa(new Rating().setId(2L).setName("PG"));
+        Film updatedFilm = new Film().setId(1).setName("upfilm").setDescription("updescr").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1)).setMpa(new Rating().setId(2L).setName("PG"));
         User user = new User().setId(1).setEmail("email@.ru").setName("Name").setLogin("login").setBirthday(LocalDate.of(2000, 1, 1));
         User user2 = new User().setId(2).setEmail("email@.ru").setName("Name2").setLogin("login").setBirthday(LocalDate.of(2000, 1, 1));
         User user3 = new User().setId(3).setEmail("email@.ru").setName("Name3").setLogin("login").setBirthday(LocalDate.of(2000, 1, 1));
@@ -50,13 +51,6 @@ public class FilmDbTest {
         Assertions.assertEquals(filmSet, filmSetDb, "Список фильмов восстановлен неверно");
 
         Assertions.assertEquals(film, filmDbStorage.getFilm(1), "Неверное восстановление фильмов");
-
-        filmDbStorage.addLike(1, 3);
-        Assertions.assertEquals(1, filmDbStorage.getLikes(1).size());
-        Assertions.assertTrue(filmDbStorage.getLikes(1).contains(3L), "Неверное сохранение лайков");
-
-        filmDbStorage.removeLike(1, 3);
-        Assertions.assertTrue(filmDbStorage.getMostLikedFilms(10).isEmpty());
 
         filmDbStorage.addFilm(film3);
         filmDbStorage.addLike(2, 3);
