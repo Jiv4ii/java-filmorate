@@ -8,7 +8,8 @@ import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -49,50 +50,37 @@ public class FilmService {
         if (count <= 0) {
             throw new IllegalArgumentException("Поле <count> должно быть положительным");
         }
+        log.info("Выведен список самых популярных фильмов");
         return filmStorage.getMostLikedFilms(count);
     }
 
     public Film createFilm(Film film) {
+        log.info("Фильм создан");
         return filmStorage.addFilm(film);
     }
 
     public Film updateFilm(Film film) {
+        if (filmStorage.getFilm(film.getId()) == null) {
+            throw new IllegalArgumentException("Фильм с Id - {}, не найден");
+        }
         return filmStorage.updateFilm(film);
     }
 
     public Collection<Film> getFilms() {
+        log.info("Выведен список всех фильмов");
         return filmStorage.getFilms();
     }
 
     public Film getFilm(long id) {
+        if (filmStorage.getFilm(id) == null) {
+            throw new IllegalArgumentException("Фильм с Id - {}, не найден");
+        }
+        log.info("Получен фильм id - {}",id);
         return filmStorage.getFilm(id);
     }
 
-    public Integer getRatingId(long filmId) {
-        if (filmStorage.getRatingId(filmId) == null) {
-            throw new IllegalArgumentException("Фильм с Id - {}, не найден");
-        }
-        return filmStorage.getRatingId(filmId);
-    }
 
-    public String getRating(Integer id) {
-        if (filmStorage.getRatingId(id) == null) {
-            throw new IllegalArgumentException("Rating с Id - {}, не найден");
-        }
-        return filmStorage.getRating(id);
-    }
-
-    public Integer getGenreId(long filmId) {
-        if (filmStorage.getRatingId(filmId) == null) {
-            throw new IllegalArgumentException("Фильм с Id - {}, не найден");
-        }
-        return filmStorage.getGenreId(filmId);
-    }
-
-    public String getGenre(Integer id) {
-        if (filmStorage.getRatingId(id) == null) {
-            throw new IllegalArgumentException("Genre с Id - {}, не найден");
-        }
-        return filmStorage.getGenre(id);
-    }
 }
+
+
+

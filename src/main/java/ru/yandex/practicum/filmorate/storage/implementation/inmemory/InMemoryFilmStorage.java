@@ -1,8 +1,10 @@
+/*
 package ru.yandex.practicum.filmorate.storage.implementation.inmemory;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.Film;
+import ru.yandex.practicum.filmorate.model.Rating;
 import ru.yandex.practicum.filmorate.storage.FilmStorage;
 
 import java.util.*;
@@ -11,25 +13,6 @@ import java.util.*;
 @Slf4j
 public class InMemoryFilmStorage implements FilmStorage {
 
-    @Override
-    public Integer getRatingId(long filmId) {
-        return null;
-    }
-
-    @Override
-    public String getRating(Integer id) {
-        return null;
-    }
-
-    @Override
-    public Integer getGenreId(long filmId) {
-        return null;
-    }
-
-    @Override
-    public String getGenre(Integer id) {
-        return null;
-    }
 
     @Override
     public Collection<Long> getLikes(long id) {
@@ -84,19 +67,19 @@ public class InMemoryFilmStorage implements FilmStorage {
 
     @Override
     public void addLike(long filmId, long userId) {
-        filmMap.get(filmId).getLikes().add(userId);
+        filmMap.get(filmId).getLikedUsers().add(userId);
     }
 
     @Override
     public void removeLike(long filmId, long userId) {
-        filmMap.get(filmId).getLikes().remove(userId);
+        filmMap.get(filmId).getLikedUsers().remove(userId);
     }
 
     @Override
     public List<Film> getMostLikedFilms(Integer count) {
         Collection<Film> films = new HashSet<>(getFilms());
         List<Film> sortedFilms = new ArrayList<>(films);
-        Comparator<Film> comparator = Collections.reverseOrder(Comparator.comparingInt(obj -> obj.getLikes().size()));
+        Comparator<Film> comparator = Collections.reverseOrder(Comparator.comparingInt(obj -> obj.getLikedUsers().size()));
         sortedFilms.sort(comparator);
         if (sortedFilms.size() > count) {
             sortedFilms = sortedFilms.subList(0, count);
@@ -106,3 +89,4 @@ public class InMemoryFilmStorage implements FilmStorage {
 
 
 }
+*/

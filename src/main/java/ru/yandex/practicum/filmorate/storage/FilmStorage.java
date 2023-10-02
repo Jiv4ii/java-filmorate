@@ -25,12 +25,5 @@ public interface FilmStorage {
 
     List<Film> getMostLikedFilms(Integer count);
 
-    Integer getRatingId(long filmId);
-
-    String getRating(Integer id);
-
-    Integer getGenreId(long filmId);
-
-    String getGenre(Integer id);
 
 }

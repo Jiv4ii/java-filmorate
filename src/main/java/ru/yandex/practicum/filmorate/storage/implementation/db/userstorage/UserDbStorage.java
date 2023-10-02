@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.storage.implementation.db;
+package ru.yandex.practicum.filmorate.storage.implementation.db.userstorage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,6 +26,9 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public User addUser(User user) {
+        if (user.getName().isBlank() || user.getName().isEmpty()){
+            user.setName(user.getLogin());
+        }
         jdbcTemplate.update("insert into users(email,login,name,birthday) values (?,?,?,?)", user.getEmail(), user.getLogin(), user.getName(), user.getBirthday());
         user.setId(id);
         id++;

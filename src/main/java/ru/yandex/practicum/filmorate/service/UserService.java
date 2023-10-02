@@ -67,10 +67,15 @@ public class UserService {
     }
 
     public User createUser(User user) {
+        log.info("Пользователь создан");
         return userStorage.addUser(user);
     }
 
     public User updateUser(User user) {
+        if (userStorage.getUser(user.getId()) == null) {
+            throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
+        }
+        log.info("Пользователь Id - {}, обновлен",user.getId());
         return userStorage.updateUser(user);
     }
 
@@ -79,6 +84,9 @@ public class UserService {
     }
 
     public User getUser(long id) {
+        if (userStorage.getUser(id) == null) {
+            throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
+        }
         return userStorage.getUser(id);
     }
 }

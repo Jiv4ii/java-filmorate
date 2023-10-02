@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.storage.implementation.db.UserDbStorage;
+import ru.yandex.practicum.filmorate.storage.implementation.db.userstorage.UserDbStorage;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -45,8 +45,8 @@ public class UserDbTests {
 
         userStorage.addUser(user3);
         userStorage.addFriend(3, 2);
-        Assertions.assertEquals(1, userStorage.getCommonFriends(1l, 3l).size(), "Неверное кол-во общих друзей");
-        Assertions.assertTrue(userStorage.getCommonFriends(1l, 3l).contains(user2), "Неверный общий друг");
+        Assertions.assertEquals(1, userStorage.getCommonFriends(1L, 3L).size(), "Неверное кол-во общих друзей");
+        Assertions.assertTrue(userStorage.getCommonFriends(1L, 3L).contains(user2), "Неверный общий друг");
 
         userStorage.removeFriend(1, 2);
         Assertions.assertTrue(userStorage.getFriends(1).isEmpty(), "Удаление друзей не работает");

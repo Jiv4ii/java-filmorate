@@ -1,4 +1,4 @@
-package ru.yandex.practicum.filmorate.storage.implementation.db;
+package ru.yandex.practicum.filmorate.storage.implementation.db.userstorage;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
