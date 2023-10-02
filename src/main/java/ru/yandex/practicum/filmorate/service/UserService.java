@@ -75,7 +75,7 @@ public class UserService {
         if (userStorage.getUser(user.getId()) == null) {
             throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
         }
-        log.info("Пользователь Id - {}, обновлен",user.getId());
+        log.info("Пользователь Id - {}, обновлен", user.getId());
         return userStorage.updateUser(user);
     }
 

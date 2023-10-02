@@ -75,7 +75,7 @@ public class FilmService {
         if (filmStorage.getFilm(id) == null) {
             throw new IllegalArgumentException("Фильм с Id - {}, не найден");
         }
-        log.info("Получен фильм id - {}",id);
+        log.info("Получен фильм id - {}", id);
         return filmStorage.getFilm(id);
     }
 

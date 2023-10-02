@@ -7,6 +7,7 @@ import ru.yandex.practicum.filmorate.model.Rating;
 import ru.yandex.practicum.filmorate.storage.MpaStorage;
 
 import java.util.List;
+
 @Slf4j
 @Service
 public class MpaService {
@@ -23,7 +24,7 @@ public class MpaService {
         } catch (Exception e) {
             throw new IllegalArgumentException("Некорректный рейтинг Id");
         }
-        log.info("Получен рейтинг - {}",mpaStorage.getRating(id).getName());
+        log.info("Получен рейтинг - {}", mpaStorage.getRating(id).getName());
         return mpaStorage.getRating(id);
     }
 
