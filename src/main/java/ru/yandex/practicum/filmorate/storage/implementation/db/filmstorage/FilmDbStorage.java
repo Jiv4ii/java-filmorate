@@ -65,7 +65,7 @@ public class FilmDbStorage implements FilmStorage {
                 Set<Genre> genres = new LinkedHashSet<>(jdbcTemplate.query("select genre_id, genre from FILM_GENRES as t1 inner join genres as t2 on t1.GENRE_ID = t2.ID where FILM_ID = ?", genreRowMapper, film.getId()));
                 film.setGenres(new ArrayList<>(genres));
             } catch (Exception exception) {
-
+                //Костыль на случай обращения к пустой таблице film_genres
             }
         }
         return films;
@@ -79,7 +79,7 @@ public class FilmDbStorage implements FilmStorage {
             assert film != null;
             film.setGenres(new ArrayList<>(genres));
         } catch (Exception exception) {
-
+            //Костыль на случай обращения к пустой таблице film_genres
         }
 
         return film;
@@ -105,7 +105,7 @@ public class FilmDbStorage implements FilmStorage {
                 Set<Genre> genres = new HashSet<>(jdbcTemplate.query("select genre_id, genre from FILM_GENRES as t1 inner join genres as t2 on t1.GENRE_ID = t2.ID where FILM_ID = ?", genreRowMapper, film.getId()));
                 film.setGenres(new ArrayList<>(genres));
             } catch (Exception exception) {
-
+                //Костыль на случай обращения к пустой таблице film_genres
             }
         }
         return popularFilms;
