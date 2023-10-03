@@ -33,7 +33,6 @@ public class Film {
     @JsonIgnore
     @ToString.Exclude
     private Set<Long> likedUsers = new HashSet<>();
-    private long likes = 0;
     private List<Genre> genres = new ArrayList<>();
     private Rating mpa = new Rating();
 

@@ -35,7 +35,6 @@ create table IF NOT EXISTS films
     release_date date,
     duration     integer,
     rating_id    integer,
-    likes        integer,
     FOREIGN KEY (rating_id) REFERENCES ratings (id) ON DELETE CASCADE
 );
 

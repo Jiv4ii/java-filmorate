@@ -37,14 +37,13 @@ public class FilmDbStorage implements FilmStorage {
 
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(
-                    "insert into films(name,description,release_date,duration,RATING_id,likes) values (?,?,?,?,?,?);", new String[]{"id"}
+                    "insert into films(name,description,release_date,duration,RATING_id) values (?,?,?,?,?);", new String[]{"id"}
             );
             ps.setString(1, film.getName());
             ps.setString(2, film.getDescription());
             ps.setDate(3, Date.valueOf(film.getReleaseDate()));
             ps.setInt(4, film.getDuration());
             ps.setLong(5, film.getMpa().getId());
-            ps.setLong(6, 0);
             return ps;
         }, keyHolder);
 
