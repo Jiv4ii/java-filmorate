@@ -51,7 +51,6 @@ create table IF NOT EXISTS film_likes
 (
     film_id integer,
     user_id integer,
-    PRIMARY KEY (film_id, user_id),
     FOREIGN KEY (film_id) REFERENCES films (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
