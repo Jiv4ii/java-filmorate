@@ -27,7 +27,7 @@ public class GenreConroller {
         return genreService.getGenre(id);
     }
 
-    @GetMapping()
+    @GetMapping
     public List<Genre> getGenreName() {
         return genreService.getGenres();
     }

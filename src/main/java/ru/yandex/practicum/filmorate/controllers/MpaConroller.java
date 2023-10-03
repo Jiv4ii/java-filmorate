@@ -25,7 +25,7 @@ public class MpaConroller {
         return mpaService.getGenre(id);
     }
 
-    @GetMapping()
+    @GetMapping
     public List<Rating> getFilmRating() {
         return mpaService.getGenres();
     }

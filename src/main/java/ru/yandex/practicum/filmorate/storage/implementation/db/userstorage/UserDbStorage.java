@@ -2,10 +2,14 @@ package ru.yandex.practicum.filmorate.storage.implementation.db.userstorage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
 
+import java.sql.PreparedStatement;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +18,6 @@ import java.util.Set;
 public class UserDbStorage implements UserStorage {
     private final JdbcTemplate jdbcTemplate;
     private final UserRowMapper userRowMapper;
-    private long id = 1;
 
 
     @Autowired
@@ -29,9 +32,21 @@ public class UserDbStorage implements UserStorage {
         if (user.getName().isBlank() || user.getName().isEmpty()) {
             user.setName(user.getLogin());
         }
-        jdbcTemplate.update("insert into users(email,login,name,birthday) values (?,?,?,?)", user.getEmail(), user.getLogin(), user.getName(), user.getBirthday());
-        user.setId(id);
-        id++;
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(
+                    "insert into users(email,login,name,birthday) values (?,?,?,?)", new String[]{"id"}
+            );
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getLogin());
+            ps.setString(3, user.getName());
+            ps.setDate(4, Date.valueOf(user.getBirthday()));
+
+            return ps;
+        }, keyHolder);
+        user.setId(keyHolder.getKey().longValue());
         return user;
     }
 
@@ -76,6 +91,6 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public Set<User> getFriends(long id) {
-        return new HashSet<>(jdbcTemplate.query("select * from users where id in (select friend_id from user_friends where user_id = ?)", ps -> ps.setLong(1, id), userRowMapper));
+        return new HashSet<>(jdbcTemplate.query("select u.* from users as u inner join user_friends as uf ON u.id = uf.friend_id WHERE uf.user_id = ?", ps -> ps.setLong(1, id), userRowMapper));
     }
 }
