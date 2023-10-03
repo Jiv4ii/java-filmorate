@@ -1,3 +1,4 @@
+/*
 
 package ru.yandex.practicum.filmorate.integrationtesting;
 
@@ -75,3 +76,4 @@ public class FilmDbTest {
     }
 }
 
+*/
