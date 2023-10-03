@@ -59,6 +59,9 @@ public class FilmDbTest {
         filmDbStorage.addLike(1, 1);
         filmDbStorage.addLike(3, 2);
         filmDbStorage.addLike(3, 1);
+        System.out.println(userDbStorage.getUser(1));
+        System.out.println(userDbStorage.getUser(2));
+        System.out.println(userDbStorage.getUser(3));
 
         List<Film> films = new ArrayList<>();
         films.add(film);
