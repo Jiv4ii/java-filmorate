@@ -83,7 +83,7 @@ public class UserDbStorage implements UserStorage {
 
     @Override
     public Set<User> getCommonFriends(Long userId, Long friendId) {
-        return new HashSet<>(jdbcTemplate.query("select * from users where id in (select f1.friend_id from user_friends f1 INNER JOIN user_friends f2 on f1.friend_id = f2.friend_id where f1.user_id = ? and f2.user_id = ?)", ps -> {
+        return new HashSet<>(jdbcTemplate.query("SELECT u.* FROM users u INNER JOIN user_friends f1 ON u.id = f1.friend_id INNER JOIN user_friends f2 ON f1.friend_id = f2.friend_id WHERE f1.user_id = ? AND f2.user_id = ?;", ps -> {
             ps.setLong(1, userId);
             ps.setLong(2, friendId);
         }, userRowMapper));
