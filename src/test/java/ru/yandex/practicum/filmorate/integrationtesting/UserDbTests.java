@@ -22,9 +22,9 @@ public class UserDbTests {
 
     @Test
     void testUserDb() {
-        User user = new User().setEmail("email@.ru").setName("Name").setLogin("login").setBirthday(LocalDate.of(2000, 1, 1)).setId(1);
-        User user2 = new User().setEmail("email2@.ru").setName("Name2").setLogin("login2").setBirthday(LocalDate.of(2000, 1, 1)).setId(2);
-        User user3 = new User().setEmail("email23@.ru").setName("Name2").setLogin("login23").setBirthday(LocalDate.of(2000, 1, 1)).setId(3);
+        User user = new User().setEmail("email@gri.ru").setName("Name").setLogin("logingri").setBirthday(LocalDate.of(2000, 1, 1)).setId(1);
+        User user2 = new User().setEmail("email2vov@.ru").setName("Name2").setLogin("login2vov").setBirthday(LocalDate.of(2000, 1, 1)).setId(2);
+        User user3 = new User().setEmail("email23cher@.ru").setName("Name2").setLogin("login23cher").setBirthday(LocalDate.of(2000, 1, 1)).setId(3);
         User updatedUser = new User().setEmail("emailUp@.ru").setName("NameUp").setLogin("loginUp").setBirthday(LocalDate.of(2000, 1, 1)).setId(1);
 
         userStorage.addUser(user);

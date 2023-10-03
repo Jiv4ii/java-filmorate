@@ -33,9 +33,9 @@ public class FilmDbTest {
         Film film2 = new Film().setId(2).setName("film2").setDescription("descr2").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1)).setMpa(new Rating().setId(2L).setName("PG"));
         Film film3 = new Film().setId(3).setName("film3").setDescription("descr3").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1)).setMpa(new Rating().setId(2L).setName("PG"));
         Film updatedFilm = new Film().setId(1).setName("upfilm").setDescription("updescr").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1)).setMpa(new Rating().setId(2L).setName("PG"));
-        User user = new User().setId(1).setEmail("email1@.ru").setName("Name").setLogin("login1").setBirthday(LocalDate.of(2000, 1, 1));
-        User user2 = new User().setId(2).setEmail("email2@.ru").setName("Name2").setLogin("login2").setBirthday(LocalDate.of(2000, 1, 1));
-        User user3 = new User().setId(3).setEmail("email3@.ru").setName("Name3").setLogin("login3").setBirthday(LocalDate.of(2000, 1, 1));
+        User user = new User().setId(1).setEmail("email1@stas.ru").setName("Name").setLogin("login1stas").setBirthday(LocalDate.of(2000, 1, 1));
+        User user2 = new User().setId(2).setEmail("email2@fred.ru").setName("Name2").setLogin("login2fred").setBirthday(LocalDate.of(2000, 1, 1));
+        User user3 = new User().setId(3).setEmail("email3@jorsh.ru").setName("Name3").setLogin("login3jorsh").setBirthday(LocalDate.of(2000, 1, 1));
         userDbStorage.addUser(user);
         userDbStorage.addUser(user2);
         userDbStorage.addUser(user3);
