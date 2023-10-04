@@ -1,4 +1,3 @@
-/*
 
 package ru.yandex.practicum.filmorate.integrationtesting;
 
@@ -8,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Rating;
 import ru.yandex.practicum.filmorate.model.User;
@@ -28,6 +28,7 @@ public class FilmDbTest {
     private final FilmDbStorage filmDbStorage;
     private final UserDbStorage userDbStorage;
 
+    @Transactional
     @Test
     void testFilmDb() {
         Film film = new Film().setName("film").setDescription("descr").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1)).setMpa(new Rating().setId(2L).setName("PG"));
@@ -66,14 +67,13 @@ public class FilmDbTest {
         films.add(film2);
         Assertions.assertEquals(films, filmDbStorage.getMostLikedFilms(10), "Список популярных фильмов некорректен");
 
-        filmDbStorage.updateFilm(updatedFilm);
+    /*    filmDbStorage.updateFilm(updatedFilm);
         Assertions.assertEquals(updatedFilm, filmDbStorage.getFilm(1), "Обновление фильма происходит неверно");
 
         filmDbStorage.deleteFilm(1);
-        Assertions.assertNull(filmDbStorage.getFilm(1), "Удаление пользователей не работает");
+        Assertions.assertNull(filmDbStorage.getFilm(1), "Удаление пользователей не работает");*/
 
 
     }
 }
 
-*/
