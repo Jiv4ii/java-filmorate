@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.implementation.db.userstorage.UserDbStorage;
@@ -21,11 +21,10 @@ import java.util.Set;
 @AutoConfigureTestDatabase
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@DataJpaTest
 public class UserDbTests {
     private final UserDbStorage userStorage;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Test
     void testUserDb() {
         User user = new User().setEmail("email@gri.ru").setName("Name").setLogin("logingri").setBirthday(LocalDate.of(2000, 1, 1));
