@@ -1,4 +1,3 @@
-/*
 
 package ru.yandex.practicum.filmorate.integrationtesting;
 
@@ -58,13 +57,11 @@ public class UserDbTests {
         Assertions.assertEquals(updatedUser, userStorage.getUser(1), "Пользователь неверно обновлен");
 
 
-*/
-/*        userStorage.deleteUser(1);
-        Assertions.assertNull(userStorage.getUser(1), "Пользователь не удаляется из базы данных");*//*
+        userStorage.deleteUser(1);
+        Assertions.assertNull(userStorage.getUser(1), "Пользователь не удаляется из базы данных");
 
 
 
     }
 }
 
-*/
