@@ -61,6 +61,7 @@ public class FilmDbTest {
         System.out.println(filmDbStorage.getMostLikedFilms(10));
 
 
+        System.out.println(userDbStorage.getUser(1));
         filmDbStorage.addLike(1, 3);
         filmDbStorage.addLike(1, 2);
         filmDbStorage.addLike(3, 1);
