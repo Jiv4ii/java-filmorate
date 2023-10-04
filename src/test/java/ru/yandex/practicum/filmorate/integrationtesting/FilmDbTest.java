@@ -31,7 +31,6 @@ public class FilmDbTest {
     private final FilmDbStorage filmDbStorage;
     private final UserDbStorage userDbStorage;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Test
     void testFilmDb() {
         Film film = new Film().setName("film").setDescription("descr").setDuration(120).setReleaseDate(LocalDate.of(2000, 1, 1)).setMpa(new Rating().setId(2L).setName("PG"));

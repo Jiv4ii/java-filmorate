@@ -24,7 +24,7 @@ import java.util.Set;
 public class UserDbTests {
     private final UserDbStorage userStorage;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+
     @Test
     void testUserDb() {
         User user = new User().setEmail("email@gri.ru").setName("Name").setLogin("logingri").setBirthday(LocalDate.of(2000, 1, 1));
@@ -62,7 +62,6 @@ public class UserDbTests {
 
         userStorage.deleteUser(1);
         Assertions.assertNull(userStorage.getUser(1), "Пользователь не удаляется из базы данных");
-
 
 
     }
