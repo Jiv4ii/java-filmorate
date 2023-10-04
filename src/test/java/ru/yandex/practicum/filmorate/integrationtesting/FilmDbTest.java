@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.transaction.annotation.Transactional;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.model.Rating;
@@ -15,12 +17,16 @@ import ru.yandex.practicum.filmorate.storage.implementation.db.filmstorage.FilmD
 import ru.yandex.practicum.filmorate.storage.implementation.db.userstorage.UserDbStorage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootTest
 @AutoConfigureTestDatabase
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@DataJpaTest
 public class FilmDbTest {
 
     private final FilmDbStorage filmDbStorage;
@@ -66,19 +72,19 @@ public class FilmDbTest {
         filmDbStorage.addLike(1, 2);
         filmDbStorage.addLike(3, 1);
         System.out.println(filmDbStorage.getMostLikedFilms(10));
-       /*filmDbStorage.addLike(3, 1);
+
 
         List<Film> films = new ArrayList<>();
         films.add(film);
         films.add(film3);
         films.add(film2);
-        Assertions.assertEquals(films, filmDbStorage.getMostLikedFilms(10), "Список популярных фильмов некорректен");*/
+        Assertions.assertEquals(films, filmDbStorage.getMostLikedFilms(10), "Список популярных фильмов некорректен");
 
-    /*    filmDbStorage.updateFilm(updatedFilm);
+        filmDbStorage.updateFilm(updatedFilm);
         Assertions.assertEquals(updatedFilm, filmDbStorage.getFilm(1), "Обновление фильма происходит неверно");
 
         filmDbStorage.deleteFilm(1);
-        Assertions.assertNull(filmDbStorage.getFilm(1), "Удаление пользователей не работает");*/
+        Assertions.assertNull(filmDbStorage.getFilm(1), "Удаление пользователей не работает");
 
 
     }
