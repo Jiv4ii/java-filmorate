@@ -20,6 +20,7 @@ import java.util.Set;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserDbTests {
     private final UserDbStorage userStorage;
+
     @Transactional
     @Test
     void testUserDb() {
@@ -58,8 +59,6 @@ public class UserDbTests {
 
 /*        userStorage.deleteUser(1);
         Assertions.assertNull(userStorage.getUser(1), "Пользователь не удаляется из базы данных");*/
-
-
 
 
     }
