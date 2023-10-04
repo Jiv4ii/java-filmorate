@@ -55,9 +55,16 @@ public class FilmDbTest {
         Assertions.assertEquals(film, filmDbStorage.getFilm(1), "Неверное восстановление фильмов");
 
         filmDbStorage.addFilm(film3);
+        System.out.println(filmDbStorage.getFilm(1));
+        System.out.println(filmDbStorage.getFilm(2));
+        System.out.println(filmDbStorage.getFilm(3));
+        System.out.println(filmDbStorage.getMostLikedFilms(10));
+
+
         filmDbStorage.addLike(1, 3);
         filmDbStorage.addLike(1, 2);
-        filmDbStorage.getMostLikedFilms(10);
+        filmDbStorage.addLike(3, 1);
+        System.out.println(filmDbStorage.getMostLikedFilms(10));
        /*filmDbStorage.addLike(3, 1);
 
         List<Film> films = new ArrayList<>();
