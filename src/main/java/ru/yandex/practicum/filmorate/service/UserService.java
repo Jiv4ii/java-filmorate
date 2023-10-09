@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
@@ -16,7 +17,7 @@ public class UserService {
     private final UserStorage userStorage;
 
     @Autowired
-    public UserService(UserStorage userStorage) {
+    public UserService(@Qualifier("db") UserStorage userStorage) {
         this.userStorage = userStorage;
     }
 
@@ -56,20 +57,25 @@ public class UserService {
     }
 
     public Set<User> getFriends(Long userId) {
-        User user = userStorage.getUser(userId);
-        if (user == null) {
+        Set<User> friends = userStorage.getFriends(userId);
+        if (friends == null) {
             throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
         }
         log.info("Выведен список друзей пользователя {}", userId);
-        return user.getFriends();
+        return friends;
 
     }
 
     public User createUser(User user) {
+        log.info("Пользователь создан");
         return userStorage.addUser(user);
     }
 
     public User updateUser(User user) {
+        if (userStorage.getUser(user.getId()) == null) {
+            throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
+        }
+        log.info("Пользователь Id - {}, обновлен", user.getId());
         return userStorage.updateUser(user);
     }
 
@@ -78,6 +84,9 @@ public class UserService {
     }
 
     public User getUser(long id) {
+        if (userStorage.getUser(id) == null) {
+            throw new IllegalArgumentException("Пользователь с Id - {}, не найден");
+        }
         return userStorage.getUser(id);
     }
 }

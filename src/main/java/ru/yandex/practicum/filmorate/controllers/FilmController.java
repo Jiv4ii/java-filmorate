@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.service.FilmService;
 
-
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
@@ -58,5 +57,7 @@ public class FilmController {
     public Film getFilm(@PathVariable long id) {
         return filmService.getFilm(id);
     }
+
+
 }
 

@@ -1,18 +1,23 @@
 package ru.yandex.practicum.filmorate.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.validate.DateValidation;
-
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+@Component
 @Data
 @Accessors(chain = true)
 public class Film {
@@ -25,9 +30,11 @@ public class Film {
     private LocalDate releaseDate;
     @Positive(message = "продолжительность фильма должна быть положительной")
     private int duration;
-    private Set<Long> likes = new HashSet<>();
-    private String genre;
-    private Rating rating;
+    @JsonIgnore
+    @ToString.Exclude
+    private Set<Long> likedUsers = new HashSet<>();
+    private List<Genre> genres = new ArrayList<>();
+    private Rating mpa = new Rating();
 
 }
 

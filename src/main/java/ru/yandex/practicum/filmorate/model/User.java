@@ -6,19 +6,20 @@ import lombok.Data;
 
 import lombok.ToString;
 import lombok.experimental.Accessors;
+import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Data
 @Accessors(chain = true)
+@Component
 public class User {
     private long id;
     @NotBlank(message = "Поле Email не может быть пустым")

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @Accessors(chain = true)
-public class Rating {
+public class Genre {
     private Long id;
     private String name;
 }
